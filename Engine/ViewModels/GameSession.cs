@@ -106,6 +106,7 @@ namespace Engine.ViewModels
         
         #endregion Properties
 
+        // testing an update to the code
         public GameSession() 
         {
             CurrentPlayer = new Player("Ryan","Fighter",15,20,25,0,1);
