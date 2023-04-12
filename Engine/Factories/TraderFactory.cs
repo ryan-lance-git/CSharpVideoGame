@@ -13,16 +13,16 @@ namespace Engine.Factories
 
         static TraderFactory()
         {
-            Trader susan = new Trader("Susan");
+            Trader susan = new Trader("Susan", "TraderSusan.jpg");
             susan.AddItemToInventory(ItemFactory.CreateGameItem(1001)); // Stick
             susan.AddItemToInventory(ItemFactory.CreateGameItem(3001)); // Healing potion
             susan.AddItemToInventory(ItemFactory.CreateGameItem(9005)); // Spider fang
 
-            Trader farmerTed = new Trader("Farmer Ted");
+            Trader farmerTed = new Trader("Farmer Ted", "FarmerTed.jpg");
             farmerTed.AddItemToInventory(ItemFactory.CreateGameItem(2001)); // Small red jewel
             farmerTed.AddItemToInventory(ItemFactory.CreateGameItem(1003)); // Wooden club
 
-            Trader peteTheHerbalist = new Trader("Pete the Herbalist");
+            Trader peteTheHerbalist = new Trader("Pete the Herbalist", "Pete.jpg");
             peteTheHerbalist.AddItemToInventory(ItemFactory.CreateGameItem(3001)); // Healing potion
             peteTheHerbalist.AddItemToInventory(ItemFactory.CreateGameItem(9003)); // Rat tail
             peteTheHerbalist.AddItemToInventory(ItemFactory.CreateGameItem(9006)); // Spider silk

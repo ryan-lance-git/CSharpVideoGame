@@ -9,9 +9,10 @@ namespace Engine.Models
 {
     public class Trader : LivingEntity
     {
-        public Trader(string name) : base (name, 9999, 9999, 9999)
+        public string ImageName { get; set; }
+        public Trader(string name, string imageName) : base (name, 9999, 9999, 9999)
         {
-
+            ImageName = $"/Engine;component/Images/Traders/{imageName}";
         }
     }
 }

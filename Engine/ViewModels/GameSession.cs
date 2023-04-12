@@ -106,21 +106,7 @@ namespace Engine.ViewModels
         
         #endregion Properties
 
-        // testing an update to the code
-        public GameSession() 
-        {
-            CurrentPlayer = new Player("Ryan","Fighter",15,20,25,0,1);
-
-            GameItem startingItem = ItemFactory.CreateGameItem(1001);
-
-            CurrentWeapon = (Weapon)startingItem;
-            CurrentPlayer.AddItemToInventory(startingItem);
-
-            CurrentWorld = WorldFactory.CreateWorld();
-
-            CurrentLocation = CurrentWorld.LocationAt(0, 0);
-        }
-
+        #region Movement
         public void MoveNorth()
         {
             if (HasLocationToNorth)
@@ -152,6 +138,21 @@ namespace Engine.ViewModels
                 CurrentLocation = CurrentWorld.LocationAt(
                     CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1);
             }
+        }
+        #endregion
+
+        public GameSession() 
+        {
+            CurrentPlayer = new Player("Ryan","Fighter",15,20,25,0,1);
+
+            GameItem startingItem = ItemFactory.CreateGameItem(1001);
+
+            CurrentWeapon = (Weapon)startingItem;
+            CurrentPlayer.AddItemToInventory(startingItem);
+
+            CurrentWorld = WorldFactory.CreateWorld();
+
+            CurrentLocation = CurrentWorld.LocationAt(0, 0);
         }
 
         private void CompleteQuestsAtLocation()

@@ -7,11 +7,12 @@
         d:DataContext="{d:DesignInstance viewModels:GameSession}"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        Title="Trade Screen" Height="480" Width="680"
+        Title="Trade Screen" Height="610" Width="680"
         FontSize="11pt">
-    
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -22,19 +23,24 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0"
+        <Image Grid.Row="0" Grid.ColumnSpan="2"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top"
+                Height="200" Width="Auto"
+                Source="{Binding CurrentTrader.ImageName}"/>
+        <Label Grid.Row="1" Grid.Column="0"
                Grid.ColumnSpan="2"
                HorizontalAlignment="Center"
-               Content="{Binding CurrentTrader.Name}"/>
-        <Label Grid.Row="1" Grid.Column="0"
+               Content="{Binding CurrentTrader.Name}" Margin="0,0,0,0"/>
+        <Label Grid.Row="2"
                HorizontalAlignment="Center"
                Content="Your Inventory"/>
-        <Label Grid.Row="1" Grid.Column="1"
+        <Label Grid.Row="2" Grid.Column="1"
                HorizontalAlignment="Center"
                Content="Trader's Inventory"/>
 
-        <DataGrid Grid.Row="2" Grid.Column="0"
-                  Margin="10"
+        <DataGrid Grid.Row="3" Grid.Column="0"
+                  Margin="10,10,10,10"
                   ItemsSource="{Binding CurrentPlayer.GroupedInventory}"
                   AutoGenerateColumns="False"
                   HeadersVisibility="Column"
@@ -66,8 +72,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Grid.Row="2" Grid.Column="1"
-                  Margin="10"
+        <DataGrid Grid.Row="3" Grid.Column="1"
+                  Margin="10,10,10,10"
                   ItemsSource="{Binding CurrentTrader.GroupedInventory}"
                   AutoGenerateColumns="False"
                   HeadersVisibility="Column"
@@ -97,13 +103,13 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-            
+
         </DataGrid>
 
-        <Button Grid.Row="3" Grid.Column="1"
+        <Button Grid.Row="5" Grid.Column="1"
                 HorizontalAlignment="Right"
                 Width="75"
                 Content="Close"
-                Click="OnClick_Close"/>
+                Click="OnClick_Close" Margin="0,0,0,0"/>
     </Grid>
 </Window>

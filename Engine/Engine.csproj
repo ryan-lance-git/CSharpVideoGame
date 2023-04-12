@@ -84,5 +84,10 @@
     <Resource Include="Images\Locations\TownSquare.jpg" />
     <Resource Include="Images\Locations\Trader.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Traders\FarmerTed.jpg" />
+    <Resource Include="Images\Traders\Pete.jpg" />
+    <Resource Include="Images\Traders\TraderSusan.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
