@@ -11,7 +11,6 @@ namespace Engine.Models
     {
         private string _characterClass;
         private int _experiencePoints;
-        private int _level;
         
         public string CharacterClass
         {
@@ -30,27 +29,20 @@ namespace Engine.Models
             { 
                 _experiencePoints = value;
                 OnPropertyChanged(nameof(ExperiencePoints));
-            }
-        }
-        public int Level
-        {
-            get { return _level; }
-            private set
-            {
-                _level = value;
-                OnPropertyChanged(nameof(Level));
-            }
-        }
 
+                SetLevelAndMaximumHitPoints();
+            }
+        }
         public ObservableCollection<QuestStatus> Quests { get; set; }
+
+        public event EventHandler OnLeveledUp;
 
         public Player(string name, string characterClass, int currentHitPoints,
             int maximumHitPoints, int gold, int experiencePoints, int level)
-            : base(name, maximumHitPoints, currentHitPoints, gold)
+            : base(name, maximumHitPoints, currentHitPoints, gold, level)
         {
             CharacterClass = characterClass;
             ExperiencePoints = experiencePoints;
-            Level = level;
 
             Inventory = new ObservableCollection<GameItem>();
             Quests = new ObservableCollection<QuestStatus>();
@@ -61,13 +53,6 @@ namespace Engine.Models
             ExperiencePoints += amount;
         }
 
-        /// <summary>
-        /// Method used to complete quests.
-        /// Checks if the List of Item Quantities is present in the inventory. 
-        /// (i.e. does the player have 2 of Rat tail and 3 snake fang etc.)
-        /// </summary>
-        /// <param name="itemsNeeded"></param>
-        /// <returns></returns>
         public bool HasAllTheseItems(List<ItemQuantity> itemsNeeded)
         {
             foreach (ItemQuantity itemQuantity in itemsNeeded)
@@ -79,5 +64,23 @@ namespace Engine.Models
             }
             return true;
         }
+        private void AddExperience(int experiencePoints)
+        {
+            ExperiencePoints += experiencePoints;
+        }
+        private void SetLevelAndMaximumHitPoints()
+        {
+            int originalLevel = Level;
+
+            int newLevel = (ExperiencePoints / 100) + 1;
+
+            if (Level != originalLevel)
+            {
+                MaximumHitPoints = newLevel * 10;
+
+                OnLeveledUp?.Invoke(this, System.EventArgs.Empty);
+            }
+        }
+
     }
 }

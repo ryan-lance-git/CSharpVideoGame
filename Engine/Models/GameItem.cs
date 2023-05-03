@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,9 @@ namespace Engine.Models
         public string Description { get; set; }
         public int Price { get; set; }
         public bool IsUnique { get; set; }
-        public GameItem(int itemTypeID, string name, int price, 
+        private string _smallImageName { get; set; }
+        public string ImageName { get; set; }
+        public GameItem(int itemTypeID, string name, string imageName, int price, 
             string description, bool isUnique=false)
         {
             Id = itemTypeID;
@@ -21,11 +24,24 @@ namespace Engine.Models
             Description = description;
             Price = price;
             IsUnique = isUnique;
+
+            _smallImageName = imageName;
+            ImageName = $"/Engine;component/Images/Items/{imageName}";
+
+            if (imageName != null)
+            {
+                
+                //ImageName = imageName;
+            } 
+            else 
+            { 
+                ImageName = null; 
+            }
         }
 
         public GameItem Clone()
         {
-            return new GameItem(Id, Name, Price, Description);
+            return new GameItem(Id, Name, _smallImageName, Price, Description);
         }
     }
 }

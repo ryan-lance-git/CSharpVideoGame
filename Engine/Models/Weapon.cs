@@ -10,17 +10,19 @@ namespace Engine.Models
     {
         public int MaximumDamage { get; set; }
         public int MinimumDamage { get; set; }
-        public Weapon(int itemTypeID, string name, int price, 
+        public string _smallImageName { get; set; }
+        public Weapon(int itemTypeID, string name, string imageName, int price, 
             int minDamage, int maxDamage, string description) 
-            : base(itemTypeID, name, price, description, true)
+            : base(itemTypeID, name, imageName, price, description, true)
         {
             MaximumDamage = maxDamage;
             MinimumDamage = minDamage;
+            _smallImageName = imageName;
         }
 
         public new Weapon Clone()
         {
-            return new Weapon(Id, Name, Price, MinimumDamage, MaximumDamage, Description);
+            return new Weapon(Id, Name, _smallImageName, Price, MinimumDamage, MaximumDamage, Description);
         }
     }
 }

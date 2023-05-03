@@ -23,7 +23,7 @@ namespace CSharpVideoGame_Wpf
 
             if (groupedInventoryItem != null)
             {
-                Session.CurrentPlayer.SpendGold(groupedInventoryItem.Item.Price);
+                Session.CurrentPlayer.RecieveGold(groupedInventoryItem.Item.Price);
                 Session.CurrentTrader.AddItemToInventory(groupedInventoryItem.Item);
                 Session.CurrentPlayer.RemoveItemFromInventory(groupedInventoryItem.Item);
             }

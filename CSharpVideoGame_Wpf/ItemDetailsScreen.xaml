@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -21,20 +22,26 @@
 
         <Label Grid.Row ="0" Grid.Column="0" 
                Grid.ColumnSpan="1"
+               FontSize="15"
                Content="Item Name" Name="ItemName"/>
-        <Label Grid.Row ="0" Grid.Column="1" 
-               Grid.ColumnSpan="1"
-               Content="Close Button"/>
-        <Label Grid.Row ="1" Grid.Column="0" 
-               Grid.ColumnSpan="2"
-               Content="Item Description" Name="ItemDescription"/>
+        <TextBlock Grid.Row ="1" Grid.Column="0" 
+               Name="ItemDescription" Padding="5"
+               Grid.ColumnSpan="2" Text="Item Description"
+               TextWrapping="WrapWithOverflow"/>
         <Label Grid.Row ="2" Grid.Column="0" 
                Grid.ColumnSpan="2"
                Content="Item Stats"/>
-        <Label Grid.Row ="3" Grid.Column="0" 
-               Grid.ColumnSpan="2"
-               Content="Item Picture"/>
 
+        <Image Grid.Row ="3" Grid.Column="0" 
+               Grid.ColumnSpan="2"
+               Name="ItemImage" 
+               MaxHeight="200" />
+
+        <Button Grid.Row="4" Grid.Column="1"
+                FontSize="15" Margin="4"
+                MinHeight="30"
+                MinWidth="50"
+                Content="Close" Click="OnClick_Close"/>
         
 
     </Grid>

@@ -25,8 +25,8 @@ namespace Engine.Factories
                     return rat;
                 case 3:
                     Monster giantSpider = new Monster("Giant Spider", "GiantSpider.jpg", 10, 10, 5, 7, 10, 0);
-                    AddLootItem(giantSpider, 9006, 75);
-                    AddLootItem(giantSpider, 9007, 25);
+                    AddLootItem(giantSpider, 9005, 75);
+                    AddLootItem(giantSpider, 9006, 25);
                     return giantSpider;
                 case 4:
                     Monster goblin = new Monster("Goblin", "Goblin.jpg", 20, 20, 3, 13, 25, 7);

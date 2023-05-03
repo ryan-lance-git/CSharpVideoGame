@@ -89,5 +89,22 @@
     <Resource Include="Images\Traders\Pete.jpg" />
     <Resource Include="Images\Traders\TraderSusan.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Items\BindingWraps.jpg" />
+    <Resource Include="Images\Items\HealingPotion.jpg" />
+    <Resource Include="Images\Items\RatFur.jpg" />
+    <Resource Include="Images\Items\RatTail.jpg" />
+    <Resource Include="Images\Items\SmallGreenJewel.jpg" />
+    <Resource Include="Images\Items\SmallPurpleJewel.jpg" />
+    <Resource Include="Images\Items\SmallRedJewel.jpg" />
+    <Resource Include="Images\Items\SnakeFang.jpg" />
+    <Resource Include="Images\Items\SnakeSkin.jpg" />
+    <Resource Include="Images\Items\SpiderSilk.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Items\WoodenClub.jpg" />
+    <Resource Include="Images\Items\RustySword.jpg" />
+    <Resource Include="Images\Items\Stick.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,6 +5,8 @@ using Engine.EventArgs;
 using Engine.Models;
 using System.Windows.Controls;
 using System.Data;
+using System.ComponentModel;
+using Engine.Factories;
 
 namespace CSharpVideoGame_Wpf
 {
@@ -66,9 +68,9 @@ namespace CSharpVideoGame_Wpf
 
             if (dgInventory.SelectedItem != null)
             {
-                GroupedInventoryItem inventoryItem = (GroupedInventoryItem)dgInventory.SelectedItem;
-                
-                ItemDetailsScreen itemDetailsScreen = new ItemDetailsScreen(inventoryItem.Item);
+                GameItem inventoryItem = ((GroupedInventoryItem)dgInventory.SelectedItem).Item;
+
+                ItemDetailsScreen itemDetailsScreen = new ItemDetailsScreen(inventoryItem);
                 itemDetailsScreen.Owner = this;
                 itemDetailsScreen.ShowDialog();
             }

@@ -25,7 +25,18 @@ namespace CSharpVideoGame_Wpf
             InitializeComponent();
 
             ItemName.Content = gameItem.Name;
-            ItemDescription.Content = gameItem.Description;
+            ItemDescription.Text = gameItem.Description;
+
+            if (gameItem.ImageName != null )
+            {
+                var uriSource = new Uri(gameItem.ImageName, UriKind.Relative);
+                ItemImage.Source = new BitmapImage(uriSource);
+            }
+        }
+
+        private void OnClick_Close(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -147,8 +147,10 @@ namespace Engine.ViewModels
 
             GameItem startingItem = ItemFactory.CreateGameItem(1001);
 
+
             CurrentWeapon = (Weapon)startingItem;
             CurrentPlayer.AddItemToInventory(startingItem);
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(2001));
 
             CurrentWorld = WorldFactory.CreateWorld();
 
@@ -267,7 +269,7 @@ namespace Engine.ViewModels
                 }
                 else
                 {
-                    RaiseMessage($"The {CurrentMonster.Name} hit the player for {damageToPlayer} damange.");
+                    RaiseMessage($"The {CurrentMonster.Name} hit the player for {damageToPlayer} damage.");
                     CurrentPlayer.TakeDamage(damageToPlayer);
                 }
             }
@@ -276,6 +278,7 @@ namespace Engine.ViewModels
         {
             RaiseMessage("");
             RaiseMessage($"The {CurrentMonster.Name} killed you. ");
+
             CurrentLocation = CurrentWorld.LocationAt(0, -1);
             CurrentPlayer.HealToPercent(80);
         }
@@ -293,6 +296,10 @@ namespace Engine.ViewModels
                 CurrentPlayer.AddItemToInventory(gameItem);
                 RaiseMessage($"You recieved a {gameItem.Name}");
             }
+        }
+        private void OnCurrentPlayerLeveledUp(object sender, System.EventArgs eventArgs)
+        {
+            RaiseMessage($"You leveled up! You are now level {CurrentPlayer.Level}");
         }
         private void RaiseMessage(string message)
         {
