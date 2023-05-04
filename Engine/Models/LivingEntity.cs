@@ -85,6 +85,7 @@ namespace Engine.Models
             Inventory = new ObservableCollection<GameItem>();
             GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
         }
+        sdfjlkdsfklasfdlksdf
 
         public void TakeDamage(int amount)
         {
