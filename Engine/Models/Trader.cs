@@ -9,7 +9,7 @@ namespace Engine.Models
 {
     public class Trader : LivingEntity
     {
-        public string ImageName { get; set; }
+        public string ImageName { get; }
         public Trader(string name, string imageName) : base (name, 9999, 9999, 9999)
         {
             ImageName = $"/Engine;component/Images/Traders/{imageName}";

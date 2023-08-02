@@ -18,7 +18,7 @@ namespace Engine.Models
             private set
             {
                 _characterClass = value;
-                OnPropertyChanged(nameof(CharacterClass));
+                OnPropertyChanged();
             }
                
         }
@@ -28,12 +28,12 @@ namespace Engine.Models
             private set 
             { 
                 _experiencePoints = value;
-                OnPropertyChanged(nameof(ExperiencePoints));
+                OnPropertyChanged();
 
                 SetLevelAndMaximumHitPoints();
             }
         }
-        public ObservableCollection<QuestStatus> Quests { get; set; }
+        public ObservableCollection<QuestStatus> Quests { get; }
 
         public event EventHandler OnLeveledUp;
 
@@ -44,13 +44,12 @@ namespace Engine.Models
             CharacterClass = characterClass;
             ExperiencePoints = experiencePoints;
 
-            Inventory = new ObservableCollection<GameItem>();
             Quests = new ObservableCollection<QuestStatus>();
         }
 
-        public void ReceiveExperience(int amount)
+        public void AddExperience(int experienceAmount)
         {
-            ExperiencePoints += amount;
+            ExperiencePoints += experienceAmount;
         }
 
         public bool HasAllTheseItems(List<ItemQuantity> itemsNeeded)
@@ -64,15 +63,11 @@ namespace Engine.Models
             }
             return true;
         }
-        private void AddExperience(int experiencePoints)
-        {
-            ExperiencePoints += experiencePoints;
-        }
         private void SetLevelAndMaximumHitPoints()
         {
             int originalLevel = Level;
 
-            int newLevel = (ExperiencePoints / 100) + 1;
+            int newLevel = Convert.ToInt32(Math.Floor(ExperiencePoints * 0.01)) + 1;
 
             if (Level != originalLevel)
             {

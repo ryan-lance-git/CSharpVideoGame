@@ -18,21 +18,15 @@ namespace Engine.ViewModels
         private Location _currentLocation;
         private Monster _currentMonster;
         private Trader _currentTrader;
-        public World CurrentWorld { get; set; }
+        public World CurrentWorld { get; }
         public Player CurrentPlayer
         {
             get { return _currentPlayer; }
             set
             {
-                if(_currentPlayer != null)
-                {
-                    _currentPlayer.OnKilled -= OnCurrentPlayerKilled;
-                }
+                UnsubscribeToPlayerEvents();
                 _currentPlayer = value;
-                if (_currentPlayer != null)
-                {
-                    _currentPlayer.OnKilled += OnCurrentPlayerKilled;
-                }
+                SubscribeToPlayerEvents();
             }
         }
 
@@ -42,7 +36,7 @@ namespace Engine.ViewModels
             set
             {
                 _currentLocation = value;
-                OnPropertyChanged(nameof(CurrentLocation));
+                OnPropertyChanged(); // Automatically passes in CurrentLocation
                 OnPropertyChanged(nameof(HasLocationToEast));
                 OnPropertyChanged(nameof(HasLocationToNorth));
                 OnPropertyChanged(nameof(HasLocationToSouth));
@@ -69,7 +63,7 @@ namespace Engine.ViewModels
                     _currentMonster.OnKilled += OnCurrentMonsterKilled;
                 }
 
-                OnPropertyChanged(nameof(CurrentMonster));
+                OnPropertyChanged(); // CurrentMonster
                 OnPropertyChanged(nameof(HasMonster));
 
                 if (CurrentMonster != null)
@@ -80,7 +74,7 @@ namespace Engine.ViewModels
             }
         }
 
-        public Weapon CurrentWeapon { get; set; }
+        public GameItem CurrentWeapon { get; set; }
         public Trader CurrentTrader
         {
             get { return _currentTrader; }
@@ -88,7 +82,7 @@ namespace Engine.ViewModels
             {
                 _currentTrader = value;
 
-                OnPropertyChanged(nameof(CurrentTrader));
+                OnPropertyChanged(); // HasTrader
                 OnPropertyChanged(nameof(HasTrader));
             }
         }
@@ -143,12 +137,17 @@ namespace Engine.ViewModels
 
         public GameSession() 
         {
-            CurrentPlayer = new Player("Ryan","Fighter",15,20,25,0,1);
+            string Name = "Ryan";
+            string Class = "Figher";
+            int StartHP = 15;
+            int MaxHP = 10;
+            int StartGold = 13;
+            CurrentPlayer = new Player(Name,Class,StartHP,MaxHP,StartGold,0,1);
 
             GameItem startingItem = ItemFactory.CreateGameItem(1001);
 
 
-            CurrentWeapon = (Weapon)startingItem;
+            CurrentWeapon = startingItem;
             CurrentPlayer.AddItemToInventory(startingItem);
             CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(2001));
 
@@ -183,7 +182,7 @@ namespace Engine.ViewModels
                         RaiseMessage($"\nYou completed the '{quest.Name}' quest.");
 
                         // Disburse the gold, experience and reward items for completing the quest
-                        CurrentPlayer.ReceiveExperience(quest.RewardExperiencePoints);
+                        CurrentPlayer.AddExperience(quest.RewardExperiencePoints);
                         CurrentPlayer.RecieveGold(quest.RewardGold);
                         RaiseMessage($"You recieve {quest.RewardExperiencePoints} experience points.");
                         RaiseMessage($"You recieve {quest.RewardGold} gold.");
@@ -249,8 +248,8 @@ namespace Engine.ViewModels
             }
             else
             {
-                CurrentMonster.TakeDamage(damageToMonster);
                 RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} damage.");
+                CurrentMonster.TakeDamage(damageToMonster);
             }
 
             // If the player kills the monster
@@ -274,13 +273,14 @@ namespace Engine.ViewModels
                 }
             }
         }
+
+        #region Event Handling
         private void OnCurrentPlayerKilled(object sender, System.EventArgs eventArgs)
         {
-            RaiseMessage("");
-            RaiseMessage($"The {CurrentMonster.Name} killed you. ");
+            RaiseMessage(Environment.NewLine + "You have been killed!");
 
             CurrentLocation = CurrentWorld.LocationAt(0, -1);
-            CurrentPlayer.HealToPercent(80);
+            CurrentPlayer.HealCompletely();
         }
         private void OnCurrentMonsterKilled(object sender, System.EventArgs eventArgs)
         {
@@ -288,7 +288,7 @@ namespace Engine.ViewModels
                 $"{CurrentMonster.RewardExperiencePoints} experience points and " +
                 $"{CurrentMonster.Gold} reward gold.");
 
-            CurrentPlayer.ReceiveExperience(CurrentMonster.RewardExperiencePoints);
+            CurrentPlayer.AddExperience(CurrentMonster.RewardExperiencePoints);
             CurrentPlayer.RecieveGold(CurrentMonster.Gold);
 
             foreach (GameItem gameItem in CurrentMonster.Inventory)
@@ -305,6 +305,22 @@ namespace Engine.ViewModels
         {
             OnMessageRaised?.Invoke(this, new GameMessageEventArgs(message));
         }
-
+        private void SubscribeToPlayerEvents()
+        {
+            if (_currentPlayer != null)
+            {
+                _currentPlayer.OnLeveledUp += OnCurrentPlayerLeveledUp;
+                _currentPlayer.OnKilled += OnCurrentPlayerKilled;
+            }
+        }
+        private void UnsubscribeToPlayerEvents()
+        {
+            if (_currentPlayer != null)
+            {
+                _currentPlayer.OnLeveledUp -= OnCurrentPlayerLeveledUp;
+                _currentPlayer.OnKilled -= OnCurrentPlayerKilled;
+            }
+        }
+        #endregion Event Handling
     }
 }

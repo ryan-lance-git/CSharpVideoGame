@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI", "CSharpVideoGame_Wp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{C383FE14-C7AD-4CD7-AA28-EF763DD5EE82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEngine", "TestEngine\TestEngine.csproj", "{EBC4C196-D2EF-4B38-A446-A9309F4A545A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,12 +23,16 @@ Global
 		{C383FE14-C7AD-4CD7-AA28-EF763DD5EE82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C383FE14-C7AD-4CD7-AA28-EF763DD5EE82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C383FE14-C7AD-4CD7-AA28-EF763DD5EE82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC4C196-D2EF-4B38-A446-A9309F4A545A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC4C196-D2EF-4B38-A446-A9309F4A545A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC4C196-D2EF-4B38-A446-A9309F4A545A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC4C196-D2EF-4B38-A446-A9309F4A545A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {0E7B6E5F-F47B-4F83-89B1-51F71811C196}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

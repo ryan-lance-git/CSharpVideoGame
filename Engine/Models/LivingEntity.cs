@@ -22,7 +22,7 @@ namespace Engine.Models
             private set
             {
                 _name = value;
-                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged();
             }
         }
         public int CurrentHitPoints
@@ -40,7 +40,7 @@ namespace Engine.Models
             protected set
             {
                 _maximumHitPoints = value;
-                OnPropertyChanged(nameof(MaximumHitPoints));
+                OnPropertyChanged();
             }
         }
         public int Gold
@@ -49,7 +49,7 @@ namespace Engine.Models
             private set
             {
                 _gold = value;
-                OnPropertyChanged(nameof(Gold));
+                OnPropertyChanged();
             }
         }
         public int Level
@@ -58,16 +58,17 @@ namespace Engine.Models
             protected set
             {
                 _level = value;
-                OnPropertyChanged(nameof(Level));
+                OnPropertyChanged();
             }
         }
 
         public bool IsDead => CurrentHitPoints <= 0;
         public event EventHandler OnKilled;
 
-        public ObservableCollection<GameItem> Inventory { get; set; }
-        public ObservableCollection<GroupedInventoryItem> GroupedInventory { get; set; }
-        public List<GameItem> Weapons => Inventory.Where(i => i is Weapon).ToList();
+        public ObservableCollection<GameItem> Inventory { get; }
+        public ObservableCollection<GroupedInventoryItem> GroupedInventory { get; }
+        public List<GameItem> Weapons => 
+            Inventory.Where(i => i.Category == GameItem.ItemCategory.Weapon).ToList();
         #endregion
 
         /// <summary>
@@ -85,7 +86,6 @@ namespace Engine.Models
             Inventory = new ObservableCollection<GameItem>();
             GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
         }
-        sdfjlkdsfklasfdlksdf
 
         public void TakeDamage(int amount)
         {
